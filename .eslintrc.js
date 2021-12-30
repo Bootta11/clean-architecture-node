@@ -1,15 +1,18 @@
 module.exports = {
-    "extends": "airbnb-base",
-    rules: {
-        "linebreak-style": 0,
-        "comma-dangle": 0,
-        "arrow-body-style": ["error", "always"],
-        "padded-blocks": 0,
-        "indent": ["error", 4],
-        "max-len": 0,
-        "no-unused-vars": 0,
-        "no-console": 0,
-        "radix": 0,
-        "class-methods-use-this": [0]
-    }
-};
+  env: {
+    browser: true,
+    es6: true
+  },
+  extends: 'standard',
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  },
+  rules: {
+    '@typescript-eslint/strict-boolean-expressions': 0
+  }
+}

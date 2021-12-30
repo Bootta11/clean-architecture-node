@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lodash" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/../letinvite-services/node_modules/@types/lodash" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../letinvite-services/node_modules/@types/lodash" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
