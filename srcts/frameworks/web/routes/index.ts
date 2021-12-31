@@ -1,18 +1,8 @@
-import { Router } from 'express'
-import studentsRouter from './StudentsRouter'
+import { asClass, Lifetime } from 'awilix'
+import MainRouter from './MainRouter'
+import StudentsRouter from './StudentsRouter'
 
-class ApiRouter {
-  private readonly router
-
-  constructor () {
-    this.router = Router()
-  }
-
-  loadRoutes (dependencies): Router {
-    this.router.use('/students', studentsRouter.routes(dependencies))
-    return this.router
-  }
+export default {
+  mainRouter: asClass(MainRouter, { lifetime: Lifetime.SINGLETON }),
+  studentsRouter: asClass(StudentsRouter, { lifetime: Lifetime.SINGLETON })
 }
-
-export const apiRouter = new ApiRouter()
-export default apiRouter

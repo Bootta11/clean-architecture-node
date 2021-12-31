@@ -11,14 +11,14 @@ export class BaseController {
     return response
   }
 
-  formatResponse (response, responseData: any, type: string = 'json'): void {
+  async formatResponse (response, responseData: any, type: string = 'json'): Promise<void> {
     const responseType = get(
       mapKeys(constants.responseTypes, (v, k) => String(k).toLowerCase()),
       type,
       constants.responseTypes.JSON
     )
 
-    response.format({
+    return response.format({
       [responseType]: () => response.send(responseData)
     })
   }

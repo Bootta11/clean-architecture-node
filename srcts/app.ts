@@ -1,8 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import routes from './frameworks/web/routes'
 import projectDependencies from './config/projectDependencies'
 import errorHandler from './frameworks/common/ErrorHandler'
+import container from './config/container'
 
 class App {
   private readonly app
@@ -20,10 +20,16 @@ class App {
       this.app.use(bodyParser.json())
 
       // load routes
-      this.app.use('/api', routes.loadRoutes(projectDependencies))
+      this.app.use('/api', container.resolve('mainRouter').loadRoutes())
 
       // generic error handler
       this.app.use(errorHandler.handle)
+
+      // create request scope
+      this.app.use((req) => {
+        // create request scope
+        req.scope = container.createScope()
+      })
 
       // eslint-disable-next-line arrow-body-style
       this.app.listen(this.port, () => console.log(`http://localhost:${String(this.port)}`))

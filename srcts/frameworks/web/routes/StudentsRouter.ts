@@ -1,12 +1,11 @@
-import StudentController from '../../../controllers/students/StudentController'
 import { Router } from 'express'
 import bindAll from 'bind-all'
+import container from '../../../config/container'
 
-class StudentsRouter {
-  routes (dependencies): Router {
+export default class StudentsRouter {
+  routes (): Router {
     const router = Router()
-    console.log(dependencies)
-    const controller = bindAll(new StudentController(dependencies))
+    const controller = bindAll(container.resolve('studentController'))
 
     router.route('/')
       .get(controller.getAllStudents)
@@ -21,5 +20,3 @@ class StudentsRouter {
     return router
   }
 }
-
-export default new StudentsRouter()
