@@ -22,11 +22,9 @@ class StudentController extends BaseController {
     const AddStudentCommand = new AddStudent(this.studentRepository, this.crmServices)
     const { firstName, lastName, email } = req.body
 
-    AddStudentCommand.execute({ firstName, lastName, email }).then((response) => {
-      res.json(response)
-    }, (err) => {
-      next(err)
-    })
+    const response = await this.getResponseAndHandleError(AddStudentCommand.execute({ firstName, lastName, email }), next)
+
+    return res.json(response)
   }
 
   async getAllStudents (req, res, next): Promise<void> {
@@ -48,9 +46,7 @@ class StudentController extends BaseController {
   async addEnrollment (req, res, next): Promise<void> {
     const AddEnrollmentCommand = new AddEnrollment(this.studentRepository)
 
-    const [error, response] = await to(AddEnrollmentCommand.execute(req.params.studentId, req.body))
-
-    if (error !== undefined) next(error)
+    const response = await this.getResponseAndHandleError(AddEnrollmentCommand.execute(req.params.studentId, req.body), next)
 
     return res.json(response)
   }
